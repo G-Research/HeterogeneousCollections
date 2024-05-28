@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <WarningLevel>5</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <Version>0.5.3</Version>
+    <Authors>Nicholas Cowle</Authors>
+    <Product>HCollections</Product>
+    <Description>Heterogeneous collections for F#. Using heterogeneous collections, it's possible to act on arbitrary sum and product types in a generic way.</Description>
+    <PackageProjectUrl>https://github.com/nickcowle/HCollections</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>heterogeneous collection collections f# product sum data type types generic</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Unreachable.fs" />
+    <Compile Include="TypeList.fsi" />
+    <Compile Include="TypeList.fs" />
+    <Compile Include="HList.fsi" />
+    <Compile Include="HList.fs" />
+    <Compile Include="HListT.fsi" />
+    <Compile Include="HListT.fs" />
+    <Compile Include="HListFolder.fsi" />
+    <Compile Include="HListFolder.fs" />
+    <Compile Include="HUnion.fsi" />
+    <Compile Include="HUnion.fs" />
+    <Compile Include="TypeListList.fsi" />
+    <Compile Include="TypeListList.fs" />
+    <Compile Include="SumOfProducts.fsi" />
+    <Compile Include="SumOfProducts.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.5.0" />
+    <PackageReference Include="TypeEquality" Version="0.3.0" />
+  </ItemGroup>
+
+</Project>
