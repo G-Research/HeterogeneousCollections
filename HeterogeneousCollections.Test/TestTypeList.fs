@@ -2,12 +2,13 @@
 
 open HCollections
 open TypeEquality
-open System
-open Xunit
+open NUnit.Framework
+open FsUnitTyped
 
+[<TestFixture>]
 module TestTypeList =
 
-    [<Fact>]
+    [<Test>]
     let ``TypeList.toTypes returns the correct types in the correct order`` () =
 
         let ts : (int -> string -> bool -> unit) TypeList =
@@ -18,20 +19,23 @@ module TestTypeList =
 
         let expected = [ typeof<int> ; typeof<string> ; typeof<bool> ]
 
-        Assert.Equal<Type list>(expected, ts |> TypeList.toTypes)
+        ts |> TypeList.toTypes
+        |> shouldEqual expected
 
-    [<Fact>]
+    [<Test>]
     let ``TypeList.length is correct on the empty list`` () =
-        Assert.Equal<int> (0, TypeList.length TypeList.empty)
+        TypeList.length TypeList.empty
+        |> shouldEqual 0
 
-    [<Fact>]
+    [<Test>]
     let ``TypeList.length is correct on a list of length 1`` () =
         let ts : (int -> unit) TypeList =
             TypeList.empty
             |> TypeList.cons
-        Assert.Equal<int> (1, TypeList.length ts)
+        TypeList.length ts
+        |> shouldEqual 1
 
-    [<Fact>]
+    [<Test>]
     let ``TypeList.length is correct on a list of length 3 which was made by splitting a list of length 4`` () =
         let ts : (float -> int -> string -> bool -> unit) TypeList =
             TypeList.empty
@@ -49,4 +53,5 @@ module TestTypeList =
                         |> Teq.castFrom (TypeList.cong (Teq.Cong.rangeOf t))
                 }
 
-        Assert.Equal<int> (3, TypeList.length chopped)
+        TypeList.length chopped
+        |> shouldEqual 3

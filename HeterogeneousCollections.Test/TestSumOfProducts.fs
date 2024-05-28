@@ -1,8 +1,10 @@
 ﻿namespace HCollections.Test
 
 open HCollections
-open Xunit
+open NUnit.Framework
+open FsUnitTyped
 
+[<TestFixture>]
 module TestSumOfProducts =
 
     let testHList = HList.empty |> HList.cons 1234 |> HList.cons "Foo"
@@ -15,30 +17,32 @@ module TestSumOfProducts =
         let expectedString = expected |> HList.head
         let actualString = actual |> HList.head
 
-        Assert.Equal(expectedString, actualString)
+        actualString
+        |> shouldEqual expectedString
 
         let expectedInt = expected |> HList.tail |> HList.head
         let actualInt = actual |> HList.tail |> HList.head
 
-        Assert.Equal(expectedInt, actualInt)
+        actualInt
+        |> shouldEqual expectedInt
 
-    [<Fact>]
+    [<Test>]
     let ``Splitting a SumOfProducts that hasn't been extended returns an HList`` () =
 
         match testSop |> SumOfProducts.split with
         | Choice1Of2 xs -> assertHListsEqual testHList xs
-        | Choice2Of2 _ -> Assert.True false
+        | Choice2Of2 _ -> failwith "expected Choice1Of2, got Choice2Of2"
 
-    [<Fact>]
+    [<Test>]
     let ``Splitting a SumOfProducts that has been extended returns the inner SumOfProducts`` () =
 
         let union = testSop |> SumOfProducts.extend (TypeList.empty |> TypeList.cons<bool, _>)
 
         match union |> SumOfProducts.split with
-        | Choice1Of2 _ -> Assert.True false
-        | Choice2Of2 _ -> Assert.True true
+        | Choice1Of2 _ -> failwith "expected Choice2Of2, got Choice1Of2"
+        | Choice2Of2 _ -> ()
 
-    [<Fact>]
+    [<Test>]
     let ``getSingleton returns the correct value`` () =
 
         let actual = testSop |> SumOfProducts.getSingleton

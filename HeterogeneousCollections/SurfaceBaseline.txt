@@ -1,0 +1,64 @@
+HCollections.HList inherit obj
+HCollections.HList.cong [static method]: TypeEquality.Teq<'ts1, 'ts2> -> TypeEquality.Teq<'ts1 HCollections.HList, 'ts2 HCollections.HList>
+HCollections.HList.cons [static method]: 't -> 'ts HCollections.HList -> ('t -> 'ts) HCollections.HList
+HCollections.HList.empty [static property]: [read-only] unit HCollections.HList
+HCollections.HList.fold [static method]: 'state HCollections.HListFolder -> 'state -> 'ts HCollections.HList -> 'state
+HCollections.HList.get_empty [static method]: unit -> unit HCollections.HList
+HCollections.HList.head [static method]: ('t -> 'ts) HCollections.HList -> 't
+HCollections.HList.length [static method]: 'ts HCollections.HList -> int
+HCollections.HList.tail [static method]: ('t -> 'ts) HCollections.HList -> 'ts HCollections.HList
+HCollections.HList.toTypeList [static method]: 'ts HCollections.HList -> 'ts HCollections.TypeList
+HCollections.HList`1 inherit obj
+HCollections.HListFolder inherit obj
+HCollections.HListFolder.makeElementFolder [static method]: ('state -> 'a -> 'state) -> 'state HCollections.HListFolder
+HCollections.HListFolder.makeGappedElementFolder [static method]: ('state -> 'a option -> 'state) -> 'state HCollections.HListFolder
+HCollections.HListFolder`1 - interface with 1 member(s)
+HCollections.HListFolder`1.Folder [method]: 'state -> 'a -> 'state
+HCollections.HListT inherit obj
+HCollections.HListT.cong [static method]: TypeEquality.Teq<'ts1, 'ts2> -> TypeEquality.Teq<'elem1, 'elem2> -> TypeEquality.Teq<HCollections.HListT<'ts1, 'elem1>, HCollections.HListT<'ts2, 'elem2>>
+HCollections.HListT.cons [static method]: 't -> 'elem -> HCollections.HListT<'ts, 'elem> -> HCollections.HListT<'t -> 'ts, 'elem>
+HCollections.HListT.empty [static method]: unit -> HCollections.HListT<unit, 'elem>
+HCollections.HListT.fold [static method]: HCollections.HListTFolder<'state, 'elem> -> 'state -> HCollections.HListT<'ts, 'elem> -> 'state
+HCollections.HListT.head [static method]: HCollections.HListT<'t -> 'ts, 'elem> -> ('t * 'elem)
+HCollections.HListT.length [static method]: HCollections.HListT<'ts, 'elem> -> int
+HCollections.HListT.tail [static method]: HCollections.HListT<'t -> 'ts, 'elem> -> HCollections.HListT<'ts, 'elem>
+HCollections.HListT.toHList [static method]: HCollections.HListT<'ts, 'elem> -> 'ts HCollections.HList
+HCollections.HListT.toList [static method]: HCollections.HListT<'ts, 'elem> -> 'elem list
+HCollections.HListT.toTypeList [static method]: HCollections.HListT<'ts, 'elem> -> 'ts HCollections.TypeList
+HCollections.HListT`2 inherit obj
+HCollections.HListTFolder`2 - interface with 1 member(s)
+HCollections.HListTFolder`2.Folder [method]: 'state -> 'a -> 'elem -> 'state
+HCollections.HUnion inherit obj
+HCollections.HUnion.cong [static method]: TypeEquality.Teq<'ts1, 'ts2> -> TypeEquality.Teq<'ts1 HCollections.HUnion, 'ts2 HCollections.HUnion>
+HCollections.HUnion.extend [static method]: 'ts HCollections.HUnion -> ('t -> 'ts) HCollections.HUnion
+HCollections.HUnion.getSingleton [static method]: ('t -> unit) HCollections.HUnion -> 't
+HCollections.HUnion.make [static method]: 'ts HCollections.TypeList -> 't -> ('t -> 'ts) HCollections.HUnion
+HCollections.HUnion.split [static method]: ('t -> 'ts) HCollections.HUnion -> Microsoft.FSharp.Core.FSharpChoice<'t, 'ts HCollections.HUnion>
+HCollections.HUnion.toTypeList [static method]: 'ts HCollections.HUnion -> 'ts HCollections.TypeList
+HCollections.HUnion`1 inherit obj
+HCollections.SumOfProducts inherit obj
+HCollections.SumOfProducts.cong [static method]: TypeEquality.Teq<'tss1, 'tss2> -> TypeEquality.Teq<'tss1 HCollections.SumOfProducts, 'tss2 HCollections.SumOfProducts>
+HCollections.SumOfProducts.extend [static method]: 'ts HCollections.TypeList -> 'tss HCollections.SumOfProducts -> ('ts -> 'tss) HCollections.SumOfProducts
+HCollections.SumOfProducts.getSingleton [static method]: ('ts -> unit) HCollections.SumOfProducts -> 'ts HCollections.HList
+HCollections.SumOfProducts.make [static method]: 'tss HCollections.TypeListList -> 'ts HCollections.HList -> ('ts -> 'tss) HCollections.SumOfProducts
+HCollections.SumOfProducts.split [static method]: ('ts -> 'tss) HCollections.SumOfProducts -> Microsoft.FSharp.Core.FSharpChoice<'ts HCollections.HList, 'tss HCollections.SumOfProducts>
+HCollections.SumOfProducts`1 inherit obj
+HCollections.TypeList inherit obj
+HCollections.TypeList.cong [static method]: TypeEquality.Teq<'ts1, 'ts2> -> TypeEquality.Teq<'ts1 HCollections.TypeList, 'ts2 HCollections.TypeList>
+HCollections.TypeList.cons [static method]: 'ts HCollections.TypeList -> ('t -> 'ts) HCollections.TypeList
+HCollections.TypeList.empty [static property]: [read-only] unit HCollections.TypeList
+HCollections.TypeList.get_empty [static method]: unit -> unit HCollections.TypeList
+HCollections.TypeList.length [static method]: 'ts HCollections.TypeList -> int
+HCollections.TypeList.split [static method]: 'ts HCollections.TypeList -> Microsoft.FSharp.Core.FSharpChoice<TypeEquality.Teq<'ts, unit>, 'ts HCollections.TypeListConsCrate>
+HCollections.TypeList.tail [static method]: ('t -> 'ts) HCollections.TypeList -> 'ts HCollections.TypeList
+HCollections.TypeList.toTypes [static method]: 'ts HCollections.TypeList -> System.Type list
+HCollections.TypeList`1 inherit obj
+HCollections.TypeListConsCrate`1 - interface with 1 member(s)
+HCollections.TypeListConsCrate`1.Apply [method]: HCollections.TypeListConsEvaluator<'ts, 'ret> -> 'ret
+HCollections.TypeListConsEvaluator`2 - interface with 1 member(s)
+HCollections.TypeListConsEvaluator`2.Eval [method]: 'ts2 HCollections.TypeList -> TypeEquality.Teq<'ts, 't -> 'ts2> -> 'ret
+HCollections.TypeListList inherit obj
+HCollections.TypeListList.cons [static method]: 'ts HCollections.TypeList -> 'tss HCollections.TypeListList -> ('ts -> 'tss) HCollections.TypeListList
+HCollections.TypeListList.empty [static property]: [read-only] unit HCollections.TypeListList
+HCollections.TypeListList.get_empty [static method]: unit -> unit HCollections.TypeListList
+HCollections.TypeListList`1 inherit obj

@@ -1,21 +1,22 @@
 namespace HCollections.Test
 
-open System
 open HCollections
-open Xunit
+open NUnit.Framework
+open FsUnitTyped
 
+[<TestFixture>]
 module TestHUnion =
 
     let testUnion = HUnion.make TypeList.empty 1234
 
-    [<Fact>]
+    [<Test>]
     let ``Splitting an HUnion that hasn't been extended returns the value of the union`` () =
 
         match testUnion |> HUnion.split with
-        | Choice1Of2 j -> Assert.Equal(1234, j)
-        | Choice2Of2 _ -> Assert.True false
+        | Choice1Of2 j -> j |> shouldEqual 1234
+        | Choice2Of2 _ -> failwith "expected Choice1Of2"
 
-    [<Fact>]
+    [<Test>]
     let ``Splitting an HUnion that has been extended returns the inner union`` () =
 
         let union =
@@ -23,16 +24,16 @@ module TestHUnion =
             |> HUnion.extend<string, _>
 
         match union |> HUnion.split with
-        | Choice1Of2 _ -> Assert.True false
-        | Choice2Of2 _ -> Assert.True true
+        | Choice1Of2 _ -> failwith "expected Choice2Of2"
+        | Choice2Of2 _ -> ()
 
-    [<Fact>]
+    [<Test>]
     let ``getSingleton returns the correct value`` () =
 
         let actual = testUnion |> HUnion.getSingleton
-        Assert.Equal(1234, actual)
+        actual |> shouldEqual 1234
 
-    [<Fact>]
+    [<Test>]
     let ``toTypeList is correct on a union of size 1`` () =
     
         let union = testUnion
@@ -41,9 +42,10 @@ module TestHUnion =
             |> TypeList.cons<int, _>
             |> TypeList.toTypes
 
-        Assert.Equal<Type list>(expected, HUnion.toTypeList union |> TypeList.toTypes)
+        HUnion.toTypeList union |> TypeList.toTypes
+        |> shouldEqual expected
 
-    [<Fact>]
+    [<Test>]
     let ``toTypeList is correct on a bigger union`` () =
     
         let union =
@@ -60,5 +62,6 @@ module TestHUnion =
             |> TypeList.cons
         let expected = expected |> TypeList.toTypes
 
-        Assert.Equal<Type list>(expected, HUnion.toTypeList union |> TypeList.toTypes)
+        HUnion.toTypeList union |> TypeList.toTypes
+        |> shouldEqual expected
 

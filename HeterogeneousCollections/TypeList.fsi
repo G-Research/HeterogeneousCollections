@@ -14,12 +14,19 @@ open TypeEquality
 [<NoEquality>]
 type 'ts TypeList
 
+/// A function with which you visit a TypeListConsCrate. This represents a pair:
+/// it contains a proof that `'ts` is a function type (that is, a proof that this
+/// represents a Cons cell of a type-level list), and gives you access to the
+/// head type and the tail of the list.
 type TypeListConsEvaluator<'ts, 'ret> =
+    /// Within this function, you can access the proof that `'ts` is a function type,
+    /// and hence the head and tail of the TypeList.
     abstract Eval<'t, 'ts2> : 'ts2 TypeList -> Teq<'ts, 't -> 'ts2> -> 'ret
 
+/// Visit this crate with the given evaluator to access the TypeList within the crate.
 and 'ts TypeListConsCrate =
+    /// Visit this crate with the given evaluator to access the TypeList within the crate.
     abstract Apply<'ret> : TypeListConsEvaluator<'ts, 'ret> -> 'ret
-
 
 [<RequireQualifiedAccess>]
 module TypeList =
