@@ -24,8 +24,7 @@ and private 'tss SumOfProductsExtendedCrate =
 [<RequireQualifiedAccess>]
 module SumOfProducts =
 
-    let cong (teq : Teq<'tss1, 'tss2>) : Teq<'tss1 SumOfProducts, 'tss2 SumOfProducts> =
-        Teq.Cong.believeMe teq
+    let cong (teq : Teq<'tss1, 'tss2>) : Teq<'tss1 SumOfProducts, 'tss2 SumOfProducts> = Teq.Cong.believeMe teq
 
     let make<'ts, 'tss> (tail : 'tss TypeListList) (value : 'ts HList) =
         { new SumOfProductsValueCrate<_> with
@@ -43,13 +42,13 @@ module SumOfProducts =
         match sop with
         | Value c ->
             c.Apply
-                { new SumOfProductsValueEvaluator<_,_> with
+                { new SumOfProductsValueEvaluator<_, _> with
                     member __.Eval v _ teq =
                         v |> Teq.castFrom (teq |> Teq.Cong.domainOf |> HList.cong) |> Choice1Of2
                 }
         | Extended c ->
             c.Apply
-                { new SumOfProductsExtendedEvaluator<_,_> with
+                { new SumOfProductsExtendedEvaluator<_, _> with
                     member __.Eval sop teq =
                         sop |> Teq.castFrom (teq |> Teq.Cong.rangeOf |> cong) |> Choice2Of2
                 }
@@ -58,9 +57,8 @@ module SumOfProducts =
         match sop with
         | Value c ->
             c.Apply
-                { new SumOfProductsValueEvaluator<_,_> with
+                { new SumOfProductsValueEvaluator<_, _> with
                     member __.Eval v _ teq =
                         v |> Teq.castFrom (teq |> Teq.Cong.domainOf |> HList.cong)
                 }
-        | Extended _ ->
-            raise Unreachable
+        | Extended _ -> raise Unreachable

@@ -57,7 +57,7 @@ module HListT =
 
     /// Given an HListTFolder, an initial state and an HListT, returns the result
     /// of folding the HListTFolder over the elements of the HListT.
-    val fold<'state, 'ts, 'elem> : HListTFolder<'state, 'elem> -> seed:'state -> HListT<'ts, 'elem> -> 'state
+    val fold<'state, 'ts, 'elem> : HListTFolder<'state, 'elem> -> seed : 'state -> HListT<'ts, 'elem> -> 'state
 
     /// Obtain the corresponding TypeList for the heterogeneous types in an HListT.
     val toTypeList<'ts, 'elem> : HListT<'ts, 'elem> -> TypeList<'ts>

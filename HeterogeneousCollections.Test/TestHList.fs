@@ -11,17 +11,14 @@ module TestHList =
     let ``HList to type list is correct for an empty HList`` () =
         let testHlist = HList.empty
 
-        HList.toTypeList testHlist
-        |> TypeList.toTypes
-        |> shouldEqual []
+        HList.toTypeList testHlist |> TypeList.toTypes |> shouldEqual []
 
     [<Test>]
     let ``HList to type list is correct for an HList of size 1`` () =
         let testHlist = HList.empty |> HList.cons 300
 
         let expected = TypeList.empty |> TypeList.cons<int, _> |> TypeList.toTypes
-        HList.toTypeList testHlist |> TypeList.toTypes
-        |> shouldEqual expected
+        HList.toTypeList testHlist |> TypeList.toTypes |> shouldEqual expected
 
     [<Test>]
     let ``HList to type list is correct for an HList of size 4`` () =
@@ -39,5 +36,6 @@ module TestHList =
             |> TypeList.cons<int, _>
             |> TypeList.cons<float, _>
 
-        HList.toTypeList hlist |> TypeList.toTypes
+        HList.toTypeList hlist
+        |> TypeList.toTypes
         |> shouldEqual (TypeList.toTypes expected)

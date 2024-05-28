@@ -48,34 +48,38 @@ module HListT =
     let cons<'t, 'ts, 'elem> (x : 't) (elem : 'elem) (xs : HListT<'ts, 'elem>) =
         let cons =
             { new HListTConsCrate<_, 'elem> with
-                member __.Apply e =
-                    e.Eval xs Teq.refl
+                member __.Apply e = e.Eval xs Teq.refl
             }
-        HListT.Cons (HList.cons x (toHList xs), elem::(toList xs), cons)
+
+        HListT.Cons (HList.cons x (toHList xs), elem :: (toList xs), cons)
 
     let head (xs : HListT<'t -> 'ts, 'elem>) : 't * 'elem =
         match xs with
         | Empty _ -> raise Unreachable
-        | Cons (hlist, elems, _cons) ->
-            HList.head hlist, List.head elems
+        | Cons (hlist, elems, _cons) -> HList.head hlist, List.head elems
 
     let tail (xs : HListT<'t -> 'ts, 'elem>) : HListT<'ts, 'elem> =
         match xs with
         | Empty _ -> raise Unreachable
         | Cons (_, _, cons) ->
             cons.Apply
-                { new HListTConsEvaluator<_,_,_> with
+                { new HListTConsEvaluator<_, _, _> with
                     member __.Eval xs teq =
                         let teq = cong (teq |> Teq.Cong.rangeOf) Teq.refl
                         xs |> Teq.castFrom teq
                 }
 
-    let rec fold<'state, 'ts, 'elem> (folder : HListTFolder<'state, 'elem>) (seed : 'state) (xs : HListT<'ts, 'elem>) : 'state =
+    let rec fold<'state, 'ts, 'elem>
+        (folder : HListTFolder<'state, 'elem>)
+        (seed : 'state)
+        (xs : HListT<'ts, 'elem>)
+        : 'state
+        =
         match xs with
         | Empty _ -> seed
         | Cons (hlist, elems, cons) ->
             cons.Apply
-                { new HListTConsEvaluator<_,_,_> with
+                { new HListTConsEvaluator<_, _, _> with
                     member __.Eval xs teq =
                         let x = HList.head (hlist |> Teq.castTo (HList.cong teq))
                         let y = List.head elems

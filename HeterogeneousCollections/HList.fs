@@ -22,12 +22,10 @@ module HList =
 
     let toTypeList<'ts> (xs : 'ts HList) : 'ts TypeList =
         match xs with
-        | Empty teq ->
-            TypeList.empty |> Teq.castFrom (teq |> TypeList.cong)
+        | Empty teq -> TypeList.empty |> Teq.castFrom (teq |> TypeList.cong)
         | Cons (_b, tl) -> tl
 
-    let cong (teq : Teq<'ts1, 'ts2>) : Teq<'ts1 HList, 'ts2 HList> =
-        Teq.Cong.believeMe teq
+    let cong (teq : Teq<'ts1, 'ts2>) : Teq<'ts1 HList, 'ts2 HList> = Teq.Cong.believeMe teq
 
     let empty = HList.Empty Teq.refl
 
@@ -37,10 +35,11 @@ module HList =
         | Cons (_b, tl) -> TypeList.length tl
 
     let cons (x : 't) (xs : 'ts HList) =
-        let crate = 
+        let crate =
             { new HListConsCrate<_> with
                 member __.Apply e = e.Eval x xs Teq.refl
             }
+
         let tl = TypeList.cons<'t, 'ts> (toTypeList xs)
 
         HList.Cons (crate, tl)
@@ -50,7 +49,7 @@ module HList =
         | Empty _ -> raise Unreachable
         | Cons (b, _length) ->
             b.Apply
-                { new HListConsEvaluator<_,_> with
+                { new HListConsEvaluator<_, _> with
                     member __.Eval x _ teq =
                         let teq = teq |> Teq.Cong.domainOf
                         x |> Teq.castFrom teq
@@ -61,7 +60,7 @@ module HList =
         | Empty _ -> raise Unreachable
         | Cons (b, _length) ->
             b.Apply
-                { new HListConsEvaluator<_,_> with
+                { new HListConsEvaluator<_, _> with
                     member __.Eval _ xs teq =
                         let teq = teq |> Teq.Cong.rangeOf |> cong
                         xs |> Teq.castFrom teq
@@ -72,6 +71,6 @@ module HList =
         | Empty _ -> seed
         | Cons (c, _length) ->
             c.Apply
-                { new HListConsEvaluator<_,_> with
+                { new HListConsEvaluator<_, _> with
                     member __.Eval x xs teq = fold folder (folder.Folder seed x) xs
                 }

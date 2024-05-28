@@ -49,7 +49,7 @@ module HList =
 
     /// Given an HListFolder, an initial state and an HList, returns the result
     /// of folding the HListFolder over the elements of the HList.
-    val fold<'state, 'ts> : 'state HListFolder -> seed:'state -> 'ts HList -> 'state
+    val fold<'state, 'ts> : 'state HListFolder -> seed : 'state -> 'ts HList -> 'state
 
     /// Given an HList, returns a TypeList whose types correspond to the values
     /// of the elements of the HList.
