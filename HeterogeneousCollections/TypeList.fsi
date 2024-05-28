@@ -33,10 +33,10 @@ module TypeList =
 
     /// Congruence proof for TypeLists - given a proof of equality between two types 'ts1 and 'ts2,
     /// returns a proof that 'ts1 TypeList and 'ts2 TypeList are the same type.
-    val cong : Teq<'ts1, 'ts2> -> Teq<'ts1 TypeList, 'ts2 TypeList>
+    val cong: Teq<'ts1, 'ts2> -> Teq<'ts1 TypeList, 'ts2 TypeList>
 
     /// The unique empty TypeList
-    val empty : unit TypeList
+    val empty: unit TypeList
 
     /// Given an TypeList, prepends a new type
     /// to the list of types being represented.
@@ -48,12 +48,12 @@ module TypeList =
 
     /// Given a TypeList, returns either a proof that the list is empty, or a crate
     /// containing the tail of the TypeList.
-    val split : 'ts TypeList -> Choice<Teq<'ts, unit>, 'ts TypeListConsCrate>
+    val split: 'ts TypeList -> Choice<Teq<'ts, unit>, 'ts TypeListConsCrate>
 
     /// Given a TypeList, returns the corresponding list of runtime types.
-    val toTypes : 'ts TypeList -> Type list
+    val toTypes: 'ts TypeList -> Type list
 
     /// Given a TypeList, returns the length of the list.
     /// This is equal to the number of `cons` operations on `empty` that would create the list.
     /// This operation takes time constant in the length of the TypeList.
-    val length : 'ts TypeList -> int
+    val length: 'ts TypeList -> int

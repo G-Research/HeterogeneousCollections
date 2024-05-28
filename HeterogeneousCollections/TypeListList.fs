@@ -20,8 +20,7 @@ module TypeListList =
 
     let empty = Empty Teq.refl
 
-    let cons<'ts, 'tss> (ts : 'ts TypeList) (tss : 'tss TypeListList) =
+    let cons<'ts, 'tss> (ts: 'ts TypeList) (tss: 'tss TypeListList) =
         { new TypeListListConsCrate<_> with
-            member __.Apply e = e.Eval ts tss Teq.refl<'ts -> 'tss>
-        }
+            member __.Apply e = e.Eval ts tss Teq.refl<'ts -> 'tss> }
         |> Cons

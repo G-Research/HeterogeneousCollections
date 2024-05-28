@@ -17,7 +17,7 @@ type 'tss TypeListList
 module TypeListList =
 
     /// The unique empty TypeListList
-    val empty : unit TypeListList
+    val empty: unit TypeListList
 
     /// Given an TypeListList and a list of types, prepends
     /// the list of types to those represented by the TypeListList

@@ -21,7 +21,7 @@ module SumOfProducts =
 
     /// Congruence proof for SumOfProducts - given a proof of equality between two types 'tss1 and 'tss2,
     /// returns a proof that 'tss1 SumOfProducts and 'tss2 SumOfProducts are the same type.
-    val cong : Teq<'tss1, 'tss2> -> Teq<'tss1 SumOfProducts, 'tss2 SumOfProducts>
+    val cong: Teq<'tss1, 'tss2> -> Teq<'tss1 SumOfProducts, 'tss2 SumOfProducts>
 
     /// Given a TypeListList and an HList, creates a SumOfProducts whose cases are exactly the
     /// cases in the TypeListList, plus one case for the HList supplied.
@@ -43,4 +43,4 @@ module SumOfProducts =
     val split<'ts, 'tss> : ('ts -> 'tss) SumOfProducts -> Choice<'ts HList, 'tss SumOfProducts>
 
     /// Given a SumOfProducts that contains only a single case, returns the HList of that case.
-    val getSingleton : ('ts -> unit) SumOfProducts -> 'ts HList
+    val getSingleton: ('ts -> unit) SumOfProducts -> 'ts HList

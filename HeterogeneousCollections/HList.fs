@@ -20,58 +20,53 @@ type 'state HListFolder =
 
 module HList =
 
-    let toTypeList<'ts> (xs : 'ts HList) : 'ts TypeList =
+    let toTypeList<'ts> (xs: 'ts HList) : 'ts TypeList =
         match xs with
-        | Empty teq ->
-            TypeList.empty |> Teq.castFrom (teq |> TypeList.cong)
-        | Cons (_b, tl) -> tl
+        | Empty teq -> TypeList.empty |> Teq.castFrom (teq |> TypeList.cong)
+        | Cons(_b, tl) -> tl
 
-    let cong (teq : Teq<'ts1, 'ts2>) : Teq<'ts1 HList, 'ts2 HList> =
-        Teq.Cong.believeMe teq
+    let cong (teq: Teq<'ts1, 'ts2>) : Teq<'ts1 HList, 'ts2 HList> = Teq.Cong.believeMe teq
 
     let empty = HList.Empty Teq.refl
 
-    let length<'ts> (xs : 'ts HList) : int =
+    let length<'ts> (xs: 'ts HList) : int =
         match xs with
         | Empty _ -> 0
-        | Cons (_b, tl) -> TypeList.length tl
+        | Cons(_b, tl) -> TypeList.length tl
 
-    let cons (x : 't) (xs : 'ts HList) =
-        let crate = 
+    let cons (x: 't) (xs: 'ts HList) =
+        let crate =
             { new HListConsCrate<_> with
-                member __.Apply e = e.Eval x xs Teq.refl
-            }
+                member __.Apply e = e.Eval x xs Teq.refl }
+
         let tl = TypeList.cons<'t, 'ts> (toTypeList xs)
 
-        HList.Cons (crate, tl)
+        HList.Cons(crate, tl)
 
-    let head (xs : ('t -> 'ts) HList) : 't =
+    let head (xs: ('t -> 'ts) HList) : 't =
         match xs with
         | Empty _ -> raise Unreachable
-        | Cons (b, _length) ->
+        | Cons(b, _length) ->
             b.Apply
-                { new HListConsEvaluator<_,_> with
+                { new HListConsEvaluator<_, _> with
                     member __.Eval x _ teq =
                         let teq = teq |> Teq.Cong.domainOf
-                        x |> Teq.castFrom teq
-                }
+                        x |> Teq.castFrom teq }
 
-    let tail (xs : ('t -> 'ts) HList) : 'ts HList =
+    let tail (xs: ('t -> 'ts) HList) : 'ts HList =
         match xs with
         | Empty _ -> raise Unreachable
-        | Cons (b, _length) ->
+        | Cons(b, _length) ->
             b.Apply
-                { new HListConsEvaluator<_,_> with
+                { new HListConsEvaluator<_, _> with
                     member __.Eval _ xs teq =
                         let teq = teq |> Teq.Cong.rangeOf |> cong
-                        xs |> Teq.castFrom teq
-                }
+                        xs |> Teq.castFrom teq }
 
-    let rec fold<'state, 'ts> (folder : 'state HListFolder) (seed : 'state) (xs : 'ts HList) : 'state =
+    let rec fold<'state, 'ts> (folder: 'state HListFolder) (seed: 'state) (xs: 'ts HList) : 'state =
         match xs with
         | Empty _ -> seed
-        | Cons (c, _length) ->
+        | Cons(c, _length) ->
             c.Apply
-                { new HListConsEvaluator<_,_> with
-                    member __.Eval x xs teq = fold folder (folder.Folder seed x) xs
-                }
+                { new HListConsEvaluator<_, _> with
+                    member __.Eval x xs teq = fold folder (folder.Folder seed x) xs }

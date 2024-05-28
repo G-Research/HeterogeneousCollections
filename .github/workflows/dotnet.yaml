@@ -54,8 +54,8 @@ jobs:
           dotnet-version: 6.0.x
       - name: Prepare .NET tools
         run: dotnet tool restore
-        # - name: Run Fantomas
-        #   run: ./hooks/pre-push
+      - name: Run Fantomas
+        run: ./hooks/pre-push
 
   analyze-code:
     runs-on: ubuntu-latest
@@ -134,11 +134,12 @@ jobs:
       - run: echo "All required checks complete."
 
   # This does not gate release, because external dependencies may be flaky.
-  markdown-link-check:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: gaurav-nelson/github-action-markdown-link-check@v1
+  # Disabled while the repo is private
+  # markdown-link-check:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - uses: gaurav-nelson/github-action-markdown-link-check@v1
 
     # nuget-publish:
     #   runs-on: ubuntu-latest
