@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://github.com/nickcowle/HCollections</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>heterogeneous collection collections f# product sum data type types generic</PackageTags>
+    <RootNamespace>HCollections</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="4.3.4" />
+    <PackageReference Update="FSharp.Core" Version="4.5.0" />
     <PackageReference Include="TypeEquality" Version="0.3.0" />
   </ItemGroup>
 
