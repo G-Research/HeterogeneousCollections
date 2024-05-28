@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HCollections", "HCollections\HCollections.fsproj", "{BA3388A6-FC28-49F4-A66B-E6DBF84C8C11}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HeterogeneousCollections", "HeterogeneousCollections\HeterogeneousCollections.fsproj", "{BA3388A6-FC28-49F4-A66B-E6DBF84C8C11}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HCollections.Test", "HCollections.Test\HCollections.Test.fsproj", "{70FBF65E-C781-40A4-860D-BD0A8951FC54}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HeterogeneousCollections.Test", "HeterogeneousCollections.Test\HeterogeneousCollections.Test.fsproj", "{70FBF65E-C781-40A4-860D-BD0A8951FC54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

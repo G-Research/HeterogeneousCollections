@@ -27,6 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HCollections\HCollections.fsproj" />
+    <ProjectReference Include="..\HeterogeneousCollections\HeterogeneousCollections.fsproj" />
   </ItemGroup>
 </Project>
