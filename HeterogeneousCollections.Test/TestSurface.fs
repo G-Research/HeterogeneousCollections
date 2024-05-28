@@ -19,8 +19,6 @@ module TestSurface =
     let ``Ensure public API is fully documented`` () =
         DocCoverage.assertFullyDocumented assembly
 
-(*
     [<Test>]
     let ``Ensure version is monotonic`` () =
         MonotonicVersion.validate assembly "HeterogeneousCollections"
-    *)
