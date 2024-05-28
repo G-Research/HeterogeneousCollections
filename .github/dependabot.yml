@@ -7,7 +7,7 @@ updates:
       interval: "weekly"
 
   - package-ecosystem: "nuget"
-    directory: "/HCollections"
+    directory: "/HeterogeneousCollections"
     schedule:
       interval: "weekly"
     ignore:
