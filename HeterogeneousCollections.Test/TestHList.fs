@@ -39,3 +39,19 @@ module TestHList =
         HList.toTypeList hlist
         |> TypeList.toTypes
         |> shouldEqual (TypeList.toTypes expected)
+
+    [<Test>]
+    let ``HList folder example`` () =
+        let hlist =
+            HList.empty
+            |> HList.cons false
+            |> HList.cons "hi"
+            |> HList.cons 300
+            |> HList.cons 4.0
+
+        let folder =
+            { new HListFolder<_> with
+                member _.Folder state elt = state + " " + elt.ToString ()
+            }
+
+        HList.fold folder "" hlist |> shouldEqual " 4 300 hi False"
