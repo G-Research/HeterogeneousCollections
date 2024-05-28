@@ -22,7 +22,7 @@ module TestHList =
 
     [<Test>]
     let ``HList to type list is correct for an HList of size 4`` () =
-        let hlist: (float -> int -> string -> bool -> unit) HList =
+        let hlist : (float -> int -> string -> bool -> unit) HList =
             HList.empty
             |> HList.cons false
             |> HList.cons "hi"

@@ -47,7 +47,7 @@ module TestHUnion =
             |> HUnion.extend<string, _>
             |> HUnion.extend<float, _>
 
-        let expected: TypeList<float -> string -> unit -> float -> int -> unit> =
+        let expected : TypeList<float -> string -> unit -> float -> int -> unit> =
             TypeList.empty
             |> TypeList.cons
             |> TypeList.cons

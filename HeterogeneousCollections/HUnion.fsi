@@ -20,7 +20,7 @@ module HUnion =
 
     /// Congruence proof for HUnions - given a proof of equality between two types 'ts1 and 'ts2,
     /// returns a proof that 'ts1 HUnion and 'ts2 HUnion are the same type.
-    val cong: Teq<'ts1, 'ts2> -> Teq<'ts1 HUnion, 'ts2 HUnion>
+    val cong : Teq<'ts1, 'ts2> -> Teq<'ts1 HUnion, 'ts2 HUnion>
 
     /// Given a TypeList and a value, creates an HUnion whose cases are exactly the
     /// cases in the TypeList, plus one case for the value supplied.
@@ -40,9 +40,9 @@ module HUnion =
     val split<'t, 'ts> : ('t -> 'ts) HUnion -> Choice<'t, 'ts HUnion>
 
     /// Given an HUnion that contains only a single case, returns the value of that case.
-    val getSingleton: ('t -> unit) HUnion -> 't
+    val getSingleton : ('t -> unit) HUnion -> 't
 
     /// Given an HUnion, returns a TypeList whose types correspond to the
     /// cases of the HUnion.
     /// This operation takes time constant in the size of the HUnion.
-    val toTypeList: 'ts HUnion -> 'ts TypeList
+    val toTypeList : 'ts HUnion -> 'ts TypeList

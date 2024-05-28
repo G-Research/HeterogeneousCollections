@@ -34,7 +34,7 @@ module TestHListT =
         let testHlist =
             HListT.empty<int> |> HListT.cons "hi" 4 |> HListT.cons 4.5 10 |> HListT.toList
 
-        testHlist |> shouldEqual [ 10; 4 ]
+        testHlist |> shouldEqual [ 10 ; 4 ]
 
     [<Test>]
     let ``HListT.toList on an empty HListT returns an empty list`` () =

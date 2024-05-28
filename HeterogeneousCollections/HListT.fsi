@@ -35,7 +35,7 @@ module HListT =
     /// Congruence proof for HLists - given a proof of equality between two types 'ts1 and 'ts2
     /// and a proof of equality between two types 'elem1 and 'elem2,
     /// returns a proof that HListT<'ts1, 'elem1> and HList<'ts2, 'elem2> are the same type.
-    val cong: Teq<'ts1, 'ts2> -> Teq<'elem1, 'elem2> -> Teq<HListT<'ts1, 'elem1>, HListT<'ts2, 'elem2>>
+    val cong : Teq<'ts1, 'ts2> -> Teq<'elem1, 'elem2> -> Teq<HListT<'ts1, 'elem1>, HListT<'ts2, 'elem2>>
 
     /// The unique empty HListT
     val empty<'elem> : HListT<unit, 'elem>
@@ -57,7 +57,7 @@ module HListT =
 
     /// Given an HListTFolder, an initial state and an HListT, returns the result
     /// of folding the HListTFolder over the elements of the HListT.
-    val fold<'state, 'ts, 'elem> : HListTFolder<'state, 'elem> -> seed: 'state -> HListT<'ts, 'elem> -> 'state
+    val fold<'state, 'ts, 'elem> : HListTFolder<'state, 'elem> -> seed : 'state -> HListT<'ts, 'elem> -> 'state
 
     /// Obtain the corresponding TypeList for the heterogeneous types in an HListT.
     val toTypeList<'ts, 'elem> : HListT<'ts, 'elem> -> TypeList<'ts>

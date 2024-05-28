@@ -10,7 +10,7 @@ module TestSumOfProducts =
     let testHList = HList.empty |> HList.cons 1234 |> HList.cons "Foo"
     let testSop = SumOfProducts.make TypeListList.empty testHList
 
-    let assertHListsEqual (expected: (string -> int -> unit) HList) (actual: (string -> int -> unit) HList) =
+    let assertHListsEqual (expected : (string -> int -> unit) HList) (actual : (string -> int -> unit) HList) =
 
         let expectedString = expected |> HList.head
         let actualString = actual |> HList.head
