@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <WarningLevel>5</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningsAsErrors />
-    <Version>0.5.3</Version>
-    <Authors>Nicholas Cowle</Authors>
-    <Product>HCollections</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>HeterogeneousCollections</PackageId>
+    <Authors>G-Research</Authors>
     <Description>Heterogeneous collections for F#. Using heterogeneous collections, it's possible to act on arbitrary sum and product types in a generic way.</Description>
-    <PackageProjectUrl>https://github.com/nickcowle/HCollections</PackageProjectUrl>
+    <Copyright>Copyright (c) G-Research 2024</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/G-Research/HeterogeneousCollections</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>heterogeneous collection collections f# product sum data type types generic</PackageTags>
+    <PackageTags>heterogeneous;collection;collections;f#;product;sum;generic;datatype</PackageTags>
     <RootNamespace>HCollections</RootNamespace>
   </PropertyGroup>
 
@@ -31,6 +31,9 @@
     <Compile Include="TypeListList.fs" />
     <Compile Include="SumOfProducts.fsi" />
     <Compile Include="SumOfProducts.fs" />
+    <None Include="..\README.md" Pack="true" PackagePath="/" />
+    <EmbeddedResource Include="version.json" />
+    <EmbeddedResource Include="SurfaceBaseline.txt" />
   </ItemGroup>
 
   <ItemGroup>

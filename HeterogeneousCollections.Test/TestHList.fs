@@ -1,25 +1,29 @@
 ﻿namespace HCollections.Test
 
 open HCollections
-open TypeEquality
-open System
-open Xunit
+open NUnit.Framework
+open FsUnitTyped
 
+[<TestFixture>]
 module TestHList =
 
-    [<Fact>]
+    [<Test>]
     let ``HList to type list is correct for an empty HList`` () =
         let testHlist = HList.empty
 
-        Assert.Equal (TypeList.empty, HList.toTypeList testHlist)
+        HList.toTypeList testHlist
+        |> TypeList.toTypes
+        |> shouldEqual []
 
-    [<Fact>]
+    [<Test>]
     let ``HList to type list is correct for an HList of size 1`` () =
         let testHlist = HList.empty |> HList.cons 300
 
-        Assert.Equal<Type list> (TypeList.empty |> TypeList.cons<int, _> |> TypeList.toTypes, HList.toTypeList testHlist |> TypeList.toTypes)
+        let expected = TypeList.empty |> TypeList.cons<int, _> |> TypeList.toTypes
+        HList.toTypeList testHlist |> TypeList.toTypes
+        |> shouldEqual expected
 
-    [<Fact>]
+    [<Test>]
     let ``HList to type list is correct for an HList of size 4`` () =
         let hlist : (float -> int -> string -> bool -> unit) HList =
             HList.empty
@@ -35,4 +39,5 @@ module TestHList =
             |> TypeList.cons<int, _>
             |> TypeList.cons<float, _>
 
-        Assert.Equal<Type list> (TypeList.toTypes expected, HList.toTypeList hlist |> TypeList.toTypes)
+        HList.toTypeList hlist |> TypeList.toTypes
+        |> shouldEqual (TypeList.toTypes expected)
