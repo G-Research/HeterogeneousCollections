@@ -10,8 +10,8 @@ An `int list` can only contain integers.
 The F# standard library does contain heterogeneous collection types, but there are downsides to their use.
 For example:
 
-* `System.Collections.IList`, for example, can contain different types of object, because it is not generic: every element is of type `obj`. It is therefore highly type-unsafe.
-* `Tuple` is heterogeneous: you can construct `(3, "hello")`. However, it was not designed to be a list, so it is not at all ergonomic to use this way.
+* `System.Collections.IList` can contain different types of object, because it is not generic: every element is of type `obj`. It is therefore highly type-unsafe.
+* `Tuple` is heterogeneous: you can construct `(3, "hello")`. However, it was not designed to be a list, so it is not at all ergonomic to use this way: you can't use them while being "generic over the length of the list" in the way that genuine lists naturally are.
 
 HeterogeneousCollections models heterogeneous collections at the type level, so that just as with `Tuple` you retain type safety when manipulating the list.
 
