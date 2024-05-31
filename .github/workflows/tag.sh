@@ -82,7 +82,7 @@ EOF
 if [[ "$DRY_RUN" = "1" ]]; then
     test_process_curl_error
 else
-    if curl --fail-with-body -L -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/G-Research/HeterogeousCollections/releases -d "$curl_body" > curl_output.json ; then
+    if curl --fail-with-body -L -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/G-Research/HeterogeneousCollections/releases -d "$curl_body" > curl_output.json ; then
         cat curl_output.json
         echo "cURL succeeded."
     else
