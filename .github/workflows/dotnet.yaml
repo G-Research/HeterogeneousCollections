@@ -76,10 +76,10 @@ jobs:
         run: dotnet restore ./HeterogeneousCollections/HeterogeneousCollections.fsproj
       - name: Run analyzers
         run: dotnet fsharp-analyzers --project ./HeterogeneousCollections/HeterogeneousCollections.fsproj --analyzers-path ./.analyzerpackages/g-research.fsharp.analyzers/*/ --verbosity detailed --report ./analysis.sarif --treat-as-error GRA-STRING-001 GRA-STRING-002 GRA-STRING-003 GRA-UNIONCASE-001 GRA-INTERPOLATED-001 GRA-TYPE-ANNOTATE-001 GRA-VIRTUALCALL-001 GRA-IMMUTABLECOLLECTIONEQUALITY-001 GRA-JSONOPTS-001 GRA-LOGARGFUNCFULLAPP-001 GRA-DISPBEFOREASYNC-001 --exclude-analyzers PartialAppAnalyzer
-        # - name: Upload SARIF file
-        #   uses: github/codeql-action/upload-sarif@v3
-        #   with:
-        #     sarif_file: analysis.sarif
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: analysis.sarif
 
   nuget-pack:
     runs-on: ubuntu-latest
@@ -134,12 +134,11 @@ jobs:
       - run: echo "All required checks complete."
 
   # This does not gate release, because external dependencies may be flaky.
-  # Disabled while the repo is private
-  # markdown-link-check:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v4
-  #   - uses: gaurav-nelson/github-action-markdown-link-check@v1
+  markdown-link-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: gaurav-nelson/github-action-markdown-link-check@v1
 
   nuget-publish:
     runs-on: ubuntu-latest
@@ -152,7 +151,7 @@ jobs:
         with:
           name: nuget-package
       - name: Publish to NuGet
-        run: dotnet nuget push "HeterogeneousCollections.*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push "HeterogeneousCollections.*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
   github-tag-and-release:
     runs-on: ubuntu-latest
