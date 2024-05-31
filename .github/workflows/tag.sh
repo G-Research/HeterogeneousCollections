@@ -13,7 +13,7 @@ export -f run_or_echo
 find . -maxdepth 2 -type f -name '*.nupkg' -exec bash -c 'tag=$(basename "$1" .nupkg); git tag "$tag"; run_or_echo git push origin "$tag"' shell {} \;
 
 export TAG
-TAG=$(find . -maxdepth 2 -type f -name 'ShapeSifter.*.nupkg' -exec sh -c 'basename "$1" .nupkg' shell {} \;)
+TAG=$(find . -maxdepth 2 -type f -name 'HeterogeousCollections.*.nupkg' -exec sh -c 'basename "$1" .nupkg' shell {} \;)
 
 case "$TAG" in
   *"
@@ -82,7 +82,7 @@ EOF
 if [[ "$DRY_RUN" = "1" ]]; then
     test_process_curl_error
 else
-    if curl --fail-with-body -L -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/G-Research/ShapeSifter/releases -d "$curl_body" > curl_output.json ; then
+    if curl --fail-with-body -L -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/G-Research/HeterogeousCollections/releases -d "$curl_body" > curl_output.json ; then
         cat curl_output.json
         echo "cURL succeeded."
     else
