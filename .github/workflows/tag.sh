@@ -13,7 +13,7 @@ export -f run_or_echo
 find . -maxdepth 2 -type f -name '*.nupkg' -exec bash -c 'tag=$(basename "$1" .nupkg); git tag "$tag"; run_or_echo git push origin "$tag"' shell {} \;
 
 export TAG
-TAG=$(find . -maxdepth 2 -type f -name 'HeterogenousCollections.*.nupkg' -exec sh -c 'basename "$1" .nupkg' shell {} \;)
+TAG=$(find . -maxdepth 2 -type f -name 'HeterogeneousCollections.*.nupkg' -exec sh -c 'basename "$1" .nupkg' shell {} \;)
 
 case "$TAG" in
   *"
