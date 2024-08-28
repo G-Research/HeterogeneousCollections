@@ -125,7 +125,7 @@ jobs:
 
   all-required-checks-complete:
     needs: [check-format, build, expected-pack, analyze-code, github-tag-and-release-dry-run]
-    if: ${{ always() }}
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: G-Research/common-actions/check-required-lite@main
