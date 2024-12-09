@@ -5,14 +5,14 @@
   ],
   "pathFilters": [
     ":/",
-    ":^HeterogeneousCollections.Test/",
+    ":^/HeterogeneousCollections.Test/",
     ":^/.github/",
     ":^/.config/",
     ":^/hooks/",
     ":^/analyzers/",
     ":^/.editorconfig",
     ":^/CONTRIBUTING.md",
-    ":^.git-blame-ignore-revs",
-    ":^.gitignore"
+    ":^/.git-blame-ignore-revs",
+    ":^/.gitignore"
   ]
 }
