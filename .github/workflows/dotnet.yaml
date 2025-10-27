@@ -93,7 +93,7 @@ jobs:
       - name: Pack
         run: dotnet pack HeterogeneousCollections/HeterogeneousCollections.fsproj --configuration Release
       - name: Upload NuGet artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: nuget-package
           path: HeterogeneousCollections/bin/Release/HeterogeneousCollections.*.nupkg
