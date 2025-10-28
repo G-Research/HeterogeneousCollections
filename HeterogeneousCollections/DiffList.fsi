@@ -28,13 +28,13 @@ module DiffList =
     /// returns a proof that DiffList<'ty, 'u> and DiffList<'ty, 'v> are the same type.
     val congUnification : Teq<'u, 'v> -> Teq<DiffList<'ty, 'u>, DiffList<'ty, 'v>>
 
-    /// The empty DiffList
+    /// The empty DiffList.
     val empty<'v> : DiffList<'v, 'v>
 
     /// Given an element and an DiffList, returns a new DiffList with the element prepended to it.
     val cons<'a, 'ty, 'v> : 'a -> DiffList<'ty, 'v> -> DiffList<'a -> 'ty, 'v>
 
-    /// Append two DiffLists together
+    /// Append two DiffLists together, given a common unification variable between them.
     val append<'ty, 'u, 'v> : DiffList<'ty, 'u> -> DiffList<'u, 'v> -> DiffList<'ty, 'v>
 
     /// Returns the length of the given DiffList.
