@@ -35,7 +35,9 @@ module DiffList =
     /// Given an element and an DiffList, returns a new DiffList with the element prepended to it.
     val cons<'a, 'ty, 'v> : 'a -> DiffList<'ty, 'v> -> DiffList<'a -> 'ty, 'v>
 
-    /// Append two DiffLists together, given a common unification variable between them.
+    /// Append two DiffLists together.
+    /// A DiffList is essentially a heterogeneous list which also has an "unspecified tail" slot at its end;
+    /// the type `'u` ensures that the first list's "unspecified tail" is of the right shape to be filled by the elements of the second list.
     val append<'ty, 'u, 'v> : DiffList<'ty, 'u> -> DiffList<'u, 'v> -> DiffList<'ty, 'v>
 
     /// Returns the length of the given DiffList.
