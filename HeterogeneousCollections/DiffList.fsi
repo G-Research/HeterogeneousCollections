@@ -6,7 +6,7 @@ open TypeEquality
 /// This allows for an append function between two DiffLists.
 [<NoComparison>]
 [<NoEquality>]
-type DiffList<'ty, 'v>
+type DiffList<'elts, 'tailSlot>
 
 /// DiffListFolder allows you to perform a fold over an DiffList.
 /// The single type parameter, 'state, denotes the type of the value
