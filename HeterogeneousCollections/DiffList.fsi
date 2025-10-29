@@ -16,7 +16,7 @@ type 'state DiffListFolder =
     /// Folder takes the current state, the next element in the DiffList and returns a new state.
     /// Because elements in the DiffList may have arbitrary type, F must be generic on
     /// the element type, i.e. can be called for any element type.
-    abstract Folder<'a> : 'state -> 'a -> 'state
+    abstract Folder<'elt> : 'state -> 'elt -> 'state
 
 [<RequireQualifiedAccess>]
 module DiffList =
@@ -35,8 +35,10 @@ module DiffList =
     /// Given an element and an DiffList, returns a new DiffList with the element prepended to it.
     val cons<'a, 'ty, 'v> : 'a -> DiffList<'ty, 'v> -> DiffList<'a -> 'ty, 'v>
 
-    /// Append two DiffLists together, given a common unification variable between them.
-    val append<'ty, 'u, 'v> : DiffList<'ty, 'u> -> DiffList<'u, 'v> -> DiffList<'ty, 'v>
+    /// Append two DiffLists together.
+    /// A DiffList is essentially a heterogeneous list which also has an "unspecified tail" slot at its end;
+    /// the type `'u` ensures that the first list's "unspecified tail" is of the right shape to be filled by the elements of the second list.
+    val append<'elts1, 'elts2, 'tail> : first:DiffList<'elts1, 'elts2> -> second:DiffList<'elts2, 'tail> -> DiffList<'elts1, 'tail>
 
     /// Returns the length of the given DiffList.
     /// This operation takes time constant in the length of the DiffList.
@@ -53,7 +55,7 @@ module DiffList =
     /// of folding the DiffListFolder over the elements of the DiffList.
     val fold<'state, 'ty, 'v> : 'state DiffListFolder -> seed : 'state -> DiffList<'ty, 'v> -> 'state
 
-    /// Given a DiffList, returns an HList whose elements correspond to the
+    /// Given a DiffList which has no "unspecified tail", returns an HList whose elements correspond to the
     /// elements of the DiffList.
     /// This operation takes time constant in the length of the DiffList.
     val toHList<'ty> : DiffList<'ty, unit> -> 'ty HList
