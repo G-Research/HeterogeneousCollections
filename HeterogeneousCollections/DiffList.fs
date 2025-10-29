@@ -4,16 +4,16 @@ open TypeEquality
 
 [<NoComparison>]
 [<NoEquality>]
-type DiffList<'ty, 'v> =
+type DiffList<'elts, 'tailSlot> =
     private
-    | Nil of Teq<'ty, 'v>
-    | Cons of DiffListConsCrate<'ty, 'v>
+    | Nil of Teq<'elts, 'tailSlot>
+    | Cons of DiffListConsCrate<'elts, 'tailSlot>
 
-and DiffListConsCrate<'ty, 'v> =
-    abstract member Apply<'ret> : DiffListConsEvaluator<'ty, 'v, 'ret> -> 'ret
+and DiffListConsCrate<'elts, 'tailSlot> =
+    abstract member Apply<'ret> : DiffListConsEvaluator<'elts, 'tailSlot, 'ret> -> 'ret
 
-and DiffListConsEvaluator<'ty, 'v, 'ret> =
-    abstract member Eval<'a, 'rest> : 'a * DiffList<'rest, 'v> * Teq<'ty, 'a -> 'rest> -> 'ret
+and DiffListConsEvaluator<'elts, 'tailSlot, 'ret> =
+    abstract member Eval<'a, 'rest> : 'a * DiffList<'rest, 'tailSlot> * Teq<'elts, 'a -> 'rest> -> 'ret
 
 type 'state DiffListFolder =
     abstract Folder<'a> : 'state -> 'a -> 'state
