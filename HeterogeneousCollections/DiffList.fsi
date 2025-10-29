@@ -16,7 +16,7 @@ type 'state DiffListFolder =
     /// F takes the current state, the next element in the DiffList and returns a new state.
     /// Because elements in the DiffList may have arbitrary type, F must be generic on
     /// the element type, i.e. can be called for any element type.
-    abstract Folder<'a> : 'state -> 'a -> 'state
+    abstract Folder<'elt> : 'state -> 'elt -> 'state
 
 [<RequireQualifiedAccess>]
 module DiffList =
