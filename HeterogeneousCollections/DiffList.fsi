@@ -55,7 +55,7 @@ module DiffList =
     /// of folding the DiffListFolder over the elements of the DiffList.
     val fold<'state, 'ty, 'v> : 'state DiffListFolder -> seed : 'state -> DiffList<'ty, 'v> -> 'state
 
-    /// Given a DiffList, returns an HList whose elements correspond to the
+    /// Given a DiffList which has no "unspecified tail", returns an HList whose elements correspond to the
     /// elements of the DiffList.
     /// This operation takes time constant in the length of the DiffList.
     val toHList<'ty> : DiffList<'ty, unit> -> 'ty HList
