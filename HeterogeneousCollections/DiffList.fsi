@@ -24,7 +24,7 @@ module DiffList =
     /// Congruence proof for DiffList - given two proofs of equality between elements types 'elts1 and 'elts2
     /// and tail slot types 'tailSlot1 and 'tailSlot2, returns a proof that
     /// DiffList<'elts1, 'tailSlot1> and DiffList<'elts2, 'tailSlot2> are the same type.
-    val cong :
+    val cong<'elts1, 'elts2, 'tailSlot1, 'tailSlot2> :
         Teq<'elts1, 'elts2> ->
         Teq<'tailSlot1, 'tailSlot2> ->
             Teq<DiffList<'elts1, 'tailSlot1>, DiffList<'elts2, 'tailSlot2>>
