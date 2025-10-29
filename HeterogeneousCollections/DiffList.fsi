@@ -18,6 +18,7 @@ type 'state DiffListFolder =
     /// the element type, i.e. can be called for any element type.
     abstract Folder<'a> : 'state -> 'a -> 'state
 
+[<RequireQualifiedAccess>]
 module DiffList =
 
     /// Congruence proof for DiffList - given a proof of equality between two types 'ty1 and 'ty2,
