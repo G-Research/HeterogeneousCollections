@@ -21,41 +21,42 @@ type 'state DiffListFolder =
 [<RequireQualifiedAccess>]
 module DiffList =
 
-    /// Congruence proof for DiffList - given a proof of equality between two types 'ty1 and 'ty2,
-    /// returns a proof that DiffList<'ty1, 'v> and DiffList<'ty2, 'v> are the same type.
-    val cong : Teq<'ty1, 'ty2> -> Teq<DiffList<'ty1, 'v>, DiffList<'ty2, 'v>>
-
-    /// Congruence proof for DiffList unification variable - given a proof of equality between two types 'u and 'v,
-    /// returns a proof that DiffList<'ty, 'u> and DiffList<'ty, 'v> are the same type.
-    val congUnification : Teq<'u, 'v> -> Teq<DiffList<'ty, 'u>, DiffList<'ty, 'v>>
+    /// Congruence proof for DiffList - given two proofs of equality between elements types 'elts1 and 'elts2
+    /// and tail slot types 'tailSlot1 and 'tailSlot2, returns a proof that
+    /// DiffList<'elts1, 'tailSlot1> and DiffList<'elts2, 'tailSlot2> are the same type.
+    val cong :
+        Teq<'elts1, 'elts2> ->
+        Teq<'tailSlot1, 'tailSlot2> ->
+            Teq<DiffList<'elts1, 'tailSlot1>, DiffList<'elts2, 'tailSlot2>>
 
     /// The empty DiffList.
-    val empty<'v> : DiffList<'v, 'v>
+    val empty<'elts> : DiffList<'elts, 'elts>
 
     /// Given an element and an DiffList, returns a new DiffList with the element prepended to it.
-    val cons<'a, 'ty, 'v> : 'a -> DiffList<'ty, 'v> -> DiffList<'a -> 'ty, 'v>
+    val cons<'elt, 'elts, 'tailSlot> : 'elt -> DiffList<'elts, 'tailSlot> -> DiffList<'elt -> 'elts, 'tailSlot>
 
     /// Append two DiffLists together.
     /// A DiffList is essentially a heterogeneous list which also has an "unspecified tail" slot at its end;
-    /// the type `'u` ensures that the first list's "unspecified tail" is of the right shape to be filled by the elements of the second list.
-    val append<'elts1, 'elts2, 'tail> : first:DiffList<'elts1, 'elts2> -> second:DiffList<'elts2, 'tail> -> DiffList<'elts1, 'tail>
+    /// the type `'elts2` ensures that the first list's "unspecified tail" is of the right shape to be filled by the elements of the second list.
+    val append<'elts1, 'elts2, 'tailSlot> :
+        first : DiffList<'elts1, 'elts2> -> second : DiffList<'elts2, 'tailSlot> -> DiffList<'elts1, 'tailSlot>
 
     /// Returns the length of the given DiffList.
     /// This operation takes time constant in the length of the DiffList.
-    val length<'ty, 'v> : DiffList<'ty, 'v> -> int
+    val length<'elts, 'tailSlot> : DiffList<'elts, 'tailSlot> -> int
 
     /// Given a non-empty DiffList, returns the first element.
-    val head<'a, 'ty, 'v> : DiffList<'a -> 'ty, 'v> -> 'a
+    val head<'elt, 'elts, 'tailSlot> : DiffList<'elt -> 'elts, 'tailSlot> -> 'elt
 
     /// Given a non-empty DiffList, returns a new DiffList containing all of the elements
     /// except the head.
-    val tail<'a, 'ty, 'v> : DiffList<'a -> 'ty, 'v> -> DiffList<'ty, 'v>
+    val tail<'elt, 'elts, 'tailSlot> : DiffList<'elt -> 'elts, 'tailSlot> -> DiffList<'elts, 'tailSlot>
 
     /// Given an DiffListFolder, an initial state and an DiffList, returns the result
     /// of folding the DiffListFolder over the elements of the DiffList.
-    val fold<'state, 'ty, 'v> : 'state DiffListFolder -> seed : 'state -> DiffList<'ty, 'v> -> 'state
+    val fold<'state, 'elts, 'tailSlot> : 'state DiffListFolder -> seed : 'state -> DiffList<'elts, 'tailSlot> -> 'state
 
     /// Given a DiffList which has no "unspecified tail", returns an HList whose elements correspond to the
     /// elements of the DiffList.
     /// This operation takes time constant in the length of the DiffList.
-    val toHList<'ty> : DiffList<'ty, unit> -> 'ty HList
+    val toHList<'elts> : DiffList<'elts, unit> -> 'elts HList
