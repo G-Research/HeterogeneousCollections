@@ -2,7 +2,9 @@ namespace HCollections
 
 open TypeEquality
 
-/// DiffList is a heterogeneous list similar to HList, except that it has a "unification" variable for the base.
+/// DiffList is a heterogeneous list similar to HList, except that it is modelled as a prefix.
+/// Its first type parameter holds all the types in the DiffList, as well as a suffix of types which are
+/// *not* in the DiffList; the second parameter holds that terminal segment which is not in the DiffList.
 /// This allows for an append function between two DiffLists.
 [<NoComparison>]
 [<NoEquality>]
