@@ -31,6 +31,8 @@
     <Compile Include="TypeListList.fs" />
     <Compile Include="SumOfProducts.fsi" />
     <Compile Include="SumOfProducts.fs" />
+    <Compile Include="DiffList.fsi" />
+    <Compile Include="DiffList.fs" />
     <None Include="..\README.md" Pack="true" PackagePath="/" />
     <EmbeddedResource Include="version.json" />
     <EmbeddedResource Include="SurfaceBaseline.txt" />

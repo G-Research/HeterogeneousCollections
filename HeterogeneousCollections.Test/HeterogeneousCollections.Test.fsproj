@@ -19,6 +19,7 @@
     <Compile Include="TestTypeList.fs" />
     <Compile Include="TestHUnion.fs" />
     <Compile Include="TestSumOfProducts.fs" />
+    <Compile Include="TestDiffList.fs" />
   </ItemGroup>
 
   <ItemGroup>

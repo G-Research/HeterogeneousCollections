@@ -26,6 +26,13 @@ For example:
 
 The API of `HList` is such that you cannot construct an `HList` where the type parameter does not indicate a heterogeneous list in this encoding.
 
+### DiffList
+
+`HList` does not support the `append : HList -> HList -> HList` operation, because we can't perform the type-level manipulation of "gluing two function types together" that is necessary to specify the return type.
+To accommodate `append`, the `DiffList` type is a [generalisation](https://drup.github.io/2016/08/02/difflists/) of `HList`, which additionally keeps a type parameter available to represent the "unspecified tail" of the list.
+This second type parameter is generally left generic until you come to consume the `DiffList`, whereupon type inference determines the concrete value of the generic.
+(An `HList` is conceptually simply a `DiffList` whose "unspecified tail" is then specified to be empty: morally speaking, `HList<'elements> = DiffList<'elements, unit>`.)
+
 ## The types available
 
 * `HList<_>`, as described above: heterogeneous lists.
@@ -36,6 +43,7 @@ The API of `HList` is such that you cannot construct an `HList` where the type p
 We also provide:
 
 * `TypeList<'ts>`, which is essentially "the specification of the type of an `HList<'ts>`". It contains no meaningful data.
+* `DiffList<_, _>`, as described above: heterogeneous lists with append.
 
 ## Examples
 
