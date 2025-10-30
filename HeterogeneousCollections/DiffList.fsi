@@ -14,7 +14,7 @@ type DiffList<'elts, 'tailSlot>
 type 'state DiffListFolder =
 
     /// Folder takes the current state, the next element in the DiffList and returns a new state.
-    /// Because elements in the DiffList may have arbitrary type, F must be generic on
+    /// Because elements in the DiffList may have arbitrary type, Folder must be generic on
     /// the element type, i.e. can be called for any element type.
     abstract Folder<'elt> : 'state -> 'elt -> 'state
 
