@@ -29,13 +29,16 @@ The API of `HList` is such that you cannot construct an `HList` where the type p
 ### DiffList
 
 `HList` does not support the `append : HList -> HList -> HList` operation, because we can't perform the type-level manipulation of "gluing two function types together" that is necessary to specify the return type.
-To accommodate `append`, the `DiffList` type is a [generalisation](https://drup.github.io/2016/08/02/difflists/) of `HList`, which additionally keeps a type parameter available to represent the "unspecified tail" of the list.
-This second type parameter is generally left generic until you come to consume the `DiffList`, whereupon type inference determines the concrete value of the generic.
-(An `HList` is conceptually simply a `DiffList` whose "unspecified tail" is then specified to be empty: morally speaking, `HList<'elements> = DiffList<'elements, unit>`.)
+To accommodate `append`, the `DiffList` type is a [generalisation](https://drup.github.io/2016/08/02/difflists/) of `HList`, which stores the elements-type as a pair of "list with extra elements on the end" and "suffix of that list which is *not* contained in this list".
+
+This second type parameter, and therefore part of the first type parameter, is generally left generic until you come to consume the `DiffList`, whereupon type inference determines the concrete value of the generic.
+
+(An `HList` is conceptually simply a `DiffList` whose "unused suffix" is specified to be empty: morally speaking, `HList<'elements> = DiffList<'elements, unit>`, as is expressed by the `DiffList.toHList` function.)
 
 ## The types available
 
 * `HList<_>`, as described above: heterogeneous lists.
+* `DiffList<_, _>`, as described above: heterogeneous lists with append.
 * `HListT<'ts, 'elem>`: like an `HList<'ts>`, except every element of the list is a *tuple* whose first entry is heterogeneous and whose second entry is the specific fixed `'elem` (like `int`).
 * `HUnion<'ts>`: as a discriminated union is to a tuple, so `HUnion<'ts>` is to `HList<'ts>`. This type represents "a piece of data which is exactly one of the types encoded in `'ts`".
 * `SumOfProducts<'ts>`: essentially an `HUnion` of `HList`s.
@@ -43,7 +46,6 @@ This second type parameter is generally left generic until you come to consume t
 We also provide:
 
 * `TypeList<'ts>`, which is essentially "the specification of the type of an `HList<'ts>`". It contains no meaningful data.
-* `DiffList<_, _>`, as described above: heterogeneous lists with append.
 
 ## Examples
 
