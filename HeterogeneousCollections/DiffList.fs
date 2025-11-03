@@ -26,7 +26,7 @@ module DiffList =
     let cons (x : 'elt) (xs : DiffList<'elts, 'tailSlot>) : DiffList<'elt -> 'elts, 'tailSlot> =
         let crate =
             { new DiffListConsCrate<'elt -> 'elts, 'tailSlot> with
-                member __.Apply (e) = e.Eval (x, xs, Teq.refl)
+                member _.Apply e = e.Eval (x, xs, Teq.refl)
             }
 
         DiffList.Cons crate
@@ -58,12 +58,12 @@ module DiffList =
             crate.Apply
                 { new DiffListConsEvaluator<_, _, DiffList<_, _>> with
                     member this.Eval
-                        (x : 'elt, xs : DiffList<'rest, 'elts2>, teq : Teq<'elts1, ('elt -> 'rest)>)
+                        (x : 'elt, xs : DiffList<'rest, 'elts2>, teq : Teq<'elts1, 'elt -> 'rest>)
                         : DiffList<'elts1, 'tail>
                         =
                         DiffList.Cons
                             { new DiffListConsCrate<'elts1, 'tail> with
-                                member this.Apply (e) = e.Eval (x, append xs second, teq)
+                                member this.Apply e = e.Eval (x, append xs second, teq)
                             }
                 }
 
@@ -82,7 +82,7 @@ module DiffList =
         | Cons crate ->
             crate.Apply
                 { new DiffListConsEvaluator<_, _, _> with
-                    member __.Eval (x, _, teq) =
+                    member _.Eval (x, _, teq) =
                         let teq = teq |> Teq.Cong.domainOf
                         x |> Teq.castFrom teq
                 }
@@ -109,7 +109,7 @@ module DiffList =
         | Cons crate ->
             crate.Apply
                 { new DiffListConsEvaluator<_, _, _> with
-                    member __.Eval (x, xs, _) = fold folder (folder.Folder seed x) xs
+                    member _.Eval (x, xs, _) = fold folder (folder.Folder seed x) xs
                 }
 
     let rec toHList<'elts> (xs : DiffList<'elts, unit>) : 'elts HList =
@@ -119,7 +119,7 @@ module DiffList =
             crate.Apply
                 { new DiffListConsEvaluator<'elts, unit, 'elts HList> with
                     member this.Eval
-                        (x : 'elt, xs : DiffList<'rest, unit>, teq : Teq<'elts, ('elt -> 'rest)>)
+                        (x : 'elt, xs : DiffList<'rest, unit>, teq : Teq<'elts, 'elt -> 'rest>)
                         : 'elts HList
                         =
                         HList.cons x (toHList xs) |> Teq.castFrom (HList.cong teq)

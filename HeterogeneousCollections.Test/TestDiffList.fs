@@ -18,7 +18,7 @@ module TestDiffList =
         |> shouldEqual []
 
     [<Test>]
-    let ``DiffList to HList to type list is correct for an DiffList of size 1`` () =
+    let ``DiffList to HList to type list is correct for a DiffList of size 1`` () =
         let testDiffList = DiffList.empty |> DiffList.cons 300
 
         let expected = TypeList.empty |> TypeList.cons<int, _> |> TypeList.toTypes
