@@ -1,12 +1,12 @@
 HCollections.DiffList inherit obj
-HCollections.DiffList.append [static method]: HCollections.DiffList<'elts1, 'elts2> -> HCollections.DiffList<'elts2, 'tailSlot> -> HCollections.DiffList<'elts1, 'tailSlot>
+HCollections.DiffList.append [static method]: HCollections.DiffList<'elts1Super, 'elts2Super> -> HCollections.DiffList<'elts2Super, 'suffix> -> HCollections.DiffList<'elts1Super, 'suffix>
 HCollections.DiffList.cong [static method]: TypeEquality.Teq<'elts1, 'elts2> -> TypeEquality.Teq<'tailSlot1, 'tailSlot2> -> TypeEquality.Teq<HCollections.DiffList<'elts1, 'tailSlot1>, HCollections.DiffList<'elts2, 'tailSlot2>>
-HCollections.DiffList.cons [static method]: 'elt -> HCollections.DiffList<'elts, 'tailSlot> -> HCollections.DiffList<'elt -> 'elts, 'tailSlot>
+HCollections.DiffList.cons [static method]: 'head -> HCollections.DiffList<'eltsSuper, 'suffix> -> HCollections.DiffList<'head -> 'eltsSuper, 'suffix>
 HCollections.DiffList.empty [static method]: unit -> HCollections.DiffList<'elts, 'elts>
-HCollections.DiffList.fold [static method]: 'state HCollections.DiffListFolder -> 'state -> HCollections.DiffList<'elts, 'tailSlot> -> 'state
-HCollections.DiffList.head [static method]: HCollections.DiffList<'elt -> 'elts, 'tailSlot> -> 'elt
-HCollections.DiffList.length [static method]: HCollections.DiffList<'elts, 'tailSlot> -> int
-HCollections.DiffList.tail [static method]: HCollections.DiffList<'elt -> 'elts, 'tailSlot> -> HCollections.DiffList<'elts, 'tailSlot>
+HCollections.DiffList.fold [static method]: 'state HCollections.DiffListFolder -> 'state -> HCollections.DiffList<'eltsSuper, 'suffix> -> 'state
+HCollections.DiffList.head [static method]: HCollections.DiffList<'head -> 'tailSuper, 'suffix> -> 'head
+HCollections.DiffList.length [static method]: HCollections.DiffList<'eltsSuper, 'suffix> -> int
+HCollections.DiffList.tail [static method]: HCollections.DiffList<'head -> 'tailSuper, 'suffix> -> HCollections.DiffList<'tailSuper, 'suffix>
 HCollections.DiffList.toHList [static method]: HCollections.DiffList<'elts, unit> -> 'elts HCollections.HList
 HCollections.DiffList`2 inherit obj
 HCollections.DiffListFolder`1 - interface with 1 member(s)
