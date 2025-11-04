@@ -1,3 +1,16 @@
+HCollections.DiffList inherit obj
+HCollections.DiffList.append [static method]: HCollections.DiffList<'elts1Super, 'elts2Super> -> HCollections.DiffList<'elts2Super, 'suffix> -> HCollections.DiffList<'elts1Super, 'suffix>
+HCollections.DiffList.cong [static method]: TypeEquality.Teq<'elts1, 'elts2> -> TypeEquality.Teq<'tailSlot1, 'tailSlot2> -> TypeEquality.Teq<HCollections.DiffList<'elts1, 'tailSlot1>, HCollections.DiffList<'elts2, 'tailSlot2>>
+HCollections.DiffList.cons [static method]: 'head -> HCollections.DiffList<'eltsSuper, 'suffix> -> HCollections.DiffList<'head -> 'eltsSuper, 'suffix>
+HCollections.DiffList.empty [static method]: unit -> HCollections.DiffList<'elts, 'elts>
+HCollections.DiffList.fold [static method]: 'state HCollections.DiffListFolder -> 'state -> HCollections.DiffList<'eltsSuper, 'suffix> -> 'state
+HCollections.DiffList.head [static method]: HCollections.DiffList<'head -> 'tailSuper, 'suffix> -> 'head
+HCollections.DiffList.length [static method]: HCollections.DiffList<'eltsSuper, 'suffix> -> int
+HCollections.DiffList.tail [static method]: HCollections.DiffList<'head -> 'tailSuper, 'suffix> -> HCollections.DiffList<'tailSuper, 'suffix>
+HCollections.DiffList.toHList [static method]: HCollections.DiffList<'elts, unit> -> 'elts HCollections.HList
+HCollections.DiffList`2 inherit obj
+HCollections.DiffListFolder`1 - interface with 1 member(s)
+HCollections.DiffListFolder`1.Folder [method]: 'state -> 'elt -> 'state
 HCollections.HList inherit obj
 HCollections.HList.cong [static method]: TypeEquality.Teq<'ts1, 'ts2> -> TypeEquality.Teq<'ts1 HCollections.HList, 'ts2 HCollections.HList>
 HCollections.HList.cons [static method]: 't -> 'ts HCollections.HList -> ('t -> 'ts) HCollections.HList
