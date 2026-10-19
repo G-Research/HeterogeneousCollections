@@ -71,7 +71,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore ./HeterogeneousCollections/HeterogeneousCollections.fsproj
       - name: Run analyzers
-       run: dotnet fsharp-analyzers --project ./HeterogeneousCollections/HeterogeneousCollections.fsproj --analyzers-path ./.analyzerpackages/g-research.fsharp.analyzers/*/ --verbosity detailed --report ./analysis.sarif --treat-as-error GRA-* --exclude-analyzers PartialAppAnalyzer
+        run: dotnet fsharp-analyzers --project ./HeterogeneousCollections/HeterogeneousCollections.fsproj --analyzers-path ./.analyzerpackages/g-research.fsharp.analyzers/*/ --verbosity detailed --report ./analysis.sarif --treat-as-error "GRA-*"
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@cdf488f595d80d6e07e03d4674febd5ab45fa938 # v4.37.9
         with:
