@@ -40,7 +40,7 @@ module HList =
                 member __.Apply e = e.Eval x xs Teq.refl
             }
 
-        let tl = TypeList.cons<'t, 'ts> (toTypeList xs)
+        let tl = TypeList.cons<'t, 'ts>(toTypeList xs)
 
         HList.Cons (crate, tl)
 

@@ -49,7 +49,7 @@ module HUnion =
                 member __.Apply e = e.Eval union Teq.refl<'t -> 'ts>
             }
 
-        Extended (extension, TypeList.cons<'t, 'ts> (toTypeList union))
+        Extended (extension, TypeList.cons<'t, 'ts>(toTypeList union))
 
     let split (union : ('t -> 'ts) HUnion) : Choice<'t, 'ts HUnion> =
         match union with
